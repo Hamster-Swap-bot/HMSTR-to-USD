@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hamster Kombat Swap</title>
+	<style>
+
+.converter-container {
+	width: 50%;
+	margin: 40px auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-container {
+	margin-bottom: 20px;
+}
+
+.input-container input[type="number"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.output-container {
+	margin-top: 20px;
+}
+
+.output-container input[type="text"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f0f0f0;
+}
+
+#swap-button {
+	background-color: #337ab7;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+
+.rules {
+	padding: 20px;
+}
+
+.rules ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.rules li {
+	margin-bottom: 10px;
+}
+
+.rules li:before {
+	content: "\2022";
+	color: #337ab7;
+	font-size: 18px;
+	margin-right: 10px;
+}
+	</style>
+</head>
+<body>
+	<div class="converter-container">
+		<h2>Swap $HMSTR to $USD </h2>
+		<div class="input-container">
+			<input type="number" id="hmstr-input" placeholder="Enter HMSTR amount">
+			<span>$HMSTR</span>
+		</div>
+		<div class="output-container">
+			<input type="text" id="usd-output" readonly>
+			<span>$USD</span>
+		</div>
+		<button id="swap-button"><a href="payment/payment.html" style="text-decoration: none;color: white;">Swap</a></button>
+	</div>
+
+
+	<div class="rules-container">
+		<h2>Price will update here</h2>
+		<div class="rules">
+			<!-- rules will be displayed here -->
+		</div>
+	</div>
+
+	<script>
+		   const rules = [
+	"$HMSTR 1,000,000 = $60"
+	
+];
+
+const rulesContainer = document.querySelector(".rules");
+const rulesList = document.createElement("ul");
+
+rules.forEach((rule) => {
+	const ruleListItem = document.createElement("li");
+	ruleListItem.textContent = rule;
+	rulesList.appendChild(ruleListItem);
+});
+
+rulesContainer.appendChild(rulesList);
+	</script>
+	<script>
+
+const hmstrInput = document.getElementById("hmstr-input");
+const usdOutput = document.getElementById("usd-output");
+const swapButton = document.getElementById("swap-button");
+
+let isHmstrInput = true;
+
+hmstrInput.addEventListener("input", () => {
+	const hmstrAmount = parseFloat(hmstrInput.value);
+	const usdAmount = (hmstrAmount / 1000000) * 60;
+	usdOutput.value = usdAmount.toFixed(2);
+});
+
+
+	</script>
+</body>
+</html>
